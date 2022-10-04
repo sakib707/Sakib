@@ -7,6 +7,66 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <input placeholder="password" type="text" id="input"> <br>
+    <input placeholder="confirm password" type="text" id="input-2"> <br>
+    <div id="show"></div>
+    <button id="button">Click</button> 
+
+    <script>
+        let button = document.getElementById('button');
+        let show = document.getElementById('show');
+        button.addEventListener('click', function(){
+            
+
+            let input = document.getElementById('input');
+            let input2 = document.getElementById('input-2');
+
+
+
+
+            if(input.value == ""){
+                input.style.border = "1px solid red";
+            }
+            else if(input.value.length < 8){
+                input.style.border = "1px solid blue";
+            }
+            else if(input.value != input2.value){
+                console.log('dont-match')
+                let p = document.createElement('p');
+                p.setAttribute('id', "p")
+                p.style.color = "red";
+                let text = document.createTextNode("password dont match");
+                p.appendChild(text);
+
+
+                if(show.hasChildNodes() == true){
+                    show.removeChild(document.getElementById('p'));
+                    show.appendChild(p)
+                }else{
+                    show.appendChild(p)
+                }     
+            }
+            else{
+                if(show.hasChildNodes() == true){
+                    show.removeChild(document.getElementById('p'));
+                }
+            }
+        });
+
+
+
+        function sum(a,b, callback){
+            let sum = a + b;
+            return callback(sum)
+        }
+
+
+        sum(2,2, function(e){
+            console.log(e+5);
+        })
+
+
+
+    </script>
 </body>
 </html>
