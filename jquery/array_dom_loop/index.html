@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <!-- <script src="./jquery.js"></script> -->
+        <style>
+            
+        </style>
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <input id="input">
+        <br>
+        <button id="button">click</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Sl No</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody id="show-data">
+
+            </tbody>
+        </table>
+
+
+        <script>
+            var list = ["Rakib", "Sakib", "Nayem", "Asmani", 'Rishad', 'Rezuan'];
+
+           
+
+            function ShowData(){
+                for(let i = 0; i < list.length; i++){
+                    let template = `
+                        <tr>
+                            <td>${i+1}</td>
+                            <td>${list[i]}</td>
+                        </tr>
+                    `
+
+
+                    $('#show-data').append(template)
+                }
+            }
+            ShowData();
+            $('button').click(function(){
+                let value = $('input').val(); 
+
+
+                $('#show-data').empty();
+                list.push(value);
+           
+                ShowData();
+            })
+
+        </script>
+    </body>
+</html>
