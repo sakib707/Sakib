@@ -16,10 +16,11 @@
                 <tr>
                     <th>Sl No</th>
                     <th>Name</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody id="show-data">
-
+                
             </tbody>
         </table>
 
@@ -27,29 +28,56 @@
         <script>
             var list = ["Rakib", "Sakib", "Nayem", "Asmani", 'Rishad', 'Rezuan'];
 
-           
 
             function ShowData(){
+                $('#show-data').empty();
                 for(let i = 0; i < list.length; i++){
+                    /*html*/
                     let template = `
                         <tr>
                             <td>${i+1}</td>
                             <td>${list[i]}</td>
+                            <td>
+                                <button data-value="${list[i]}" class="delete" >delete</button>
+                            </td>
                         </tr>
                     `
+                    
 
-
-                    $('#show-data').append(template)
+                    if(list[i] != undefined){
+                        $('#show-data').append(template)
+                    }
                 }
             }
             ShowData();
-            $('button').click(function(){
+
+            //Add Item Item
+            $('#button').click(function(){
                 let value = $('input').val(); 
+                
+
+                if(value == ""){
+                    alert('input is empty')
+                }
+                else{
+                
+                    list.push(value);
+                    ShowData();
+                }
+                
+
+                
+            })
 
 
-                $('#show-data').empty();
-                list.push(value);
-           
+
+
+            //delete Item Process
+            $('#show-data').on('click','.delete',function(){
+                let getData = $(this).attr('data-value');
+                
+                let position = list.indexOf(getData)
+                delete list[position];
                 ShowData();
             })
 
