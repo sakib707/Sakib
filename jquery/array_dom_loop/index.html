@@ -9,8 +9,12 @@
     <body>
         <input id="input">
         <br>
-        <button id="button">click</button>
-
+        <button id="button">add</button>
+        <br>
+        <br>
+        <input id="edit-input">
+        <br>
+        <button id="edit-button">rename</button>
         <table>
             <thead>
                 <tr>
@@ -31,6 +35,8 @@
 
             function ShowData(){
                 $('#show-data').empty();
+                list.sort();
+        
                 for(let i = 0; i < list.length; i++){
                     /*html*/
                     let template = `
@@ -39,6 +45,7 @@
                             <td>${list[i]}</td>
                             <td>
                                 <button data-value="${list[i]}" class="delete" >delete</button>
+                                <button data-value="${list[i]}" class="edit" >edit</button>
                             </td>
                         </tr>
                     `
@@ -69,8 +76,7 @@
                 
             })
 
-
-
+            
 
             //delete Item Process
             $('#show-data').on('click','.delete',function(){
@@ -79,7 +85,34 @@
                 let position = list.indexOf(getData)
                 delete list[position];
                 ShowData();
+            });
+
+            //set data  Edit Input
+            $('#show-data').on('click','.edit',function(){
+                let getData = $(this).attr('data-value');
+
+                 $('#edit-input').val(getData)
+                var position = list.indexOf(getData);
+
+                $('#edit-button').attr('position', position)
+                $('#edit-input').trigger('focus')
+                // delete list[position];
+                // ShowData();
             })
+
+
+            //Rename Array 
+            $('#edit-button').click(function(){
+                let position = $(this).attr('position');
+                let edit_value = $('#edit-input').val();
+
+                list[position] = edit_value;
+                ShowData();
+            })
+
+
+
+
 
         </script>
     </body>
